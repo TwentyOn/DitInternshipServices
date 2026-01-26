@@ -1,0 +1,66 @@
+{
+  "yd_api_headers": {
+    "Authorization": "Bearer {{token}}",
+    "Client-Login": "{{login}}",
+    "Accept-Language": "ru",
+    "Use-Operator-Units": "false"
+  },
+  "yd_api_body": {
+    "method": "get",
+    "params": {
+      "SelectionCriteria": {},
+      "FieldNames": [
+        "Id",
+        "Name",
+        "StatusClarification"
+      ]
+    }
+  },
+  "outer_api_headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "origin": "https://direct.yandex.ru",
+    "referer": "https://direct.yandex.ru/dna/grid/campaigns/?ulogin={{yd_login}}",
+    "x-csrf-token": "",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 YaBrowser/25.8.0.0 Safari/537.36"
+  },
+  "outer_api_payload": {
+    "operationName": "GridCampaigns",
+    "variables": {
+      "campaignInput": {
+        "filter": {
+          "filterStatusIn": [
+            "ACTIVE",
+            "DRAFT",
+            "MODERATION",
+            "MODERATION_DENIED",
+            "RUN_WARN",
+            "STOPPED",
+            "TEMPORARILY_PAUSED"
+          ],
+          "metaTypeIn": [
+            "UC_TEXT"
+          ]
+        },
+        "statRequirements": {
+          "preset": "LAST_30DAYS",
+          "goalIds": [],
+          "useCampaignGoalIds": true
+        },
+        "orderBy": [
+          {
+            "order": "ASC",
+            "field": "NAME"
+          }
+        ],
+        "gridLightModels": true,
+        "limitOffset": {
+          "offset": 0,
+          "limit": 200
+        }
+      },
+      "login": "{{yd_login}}"
+    },
+    "query": "query GridCampaigns($login:String!, $campaignInput:GdCampaignsContainerInput!) { client(searchBy:{login:$login}){ campaigns(input:$campaignInput){ rowset{ id name type status{ primaryStatus } } totalCount } } }"
+  }
+}
