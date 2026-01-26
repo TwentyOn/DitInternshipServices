@@ -11,58 +11,5 @@
 для django-приложений
 
 Кастомные модули:
-- [FileProcessor.py](FileProcessor.py) - дополняется
+- [FileProcessor.py](FileProcessor.py) - дополняется...
 
-# Необходимые компоненты 
-- Python 3.11^
-- PostgreSQL 17.4
-- Виртуальное окружение
-- файл окружения с наименованием .env
-
-# Требования к переменным окружения (Редактируется...)
-Переменные окружения подгружаются из файла .env с помощью библиотеки dotenv.
-В файле окружения должны находиться следующие переменные:
-- переменные внешних интеграции:
-  - YAPP_TOKEN - токен API отчетов Яндекс.AppМетрики
-  - YANDEX_DIRECT_TOKEN - токен API Яндекс.Директ
-- переменные базы данных:
-  - DB_NAME - имя БД
-  - DB_USER - имя пользователя БД
-  - DB_PASSWORD - пароль
-  - DB_HOST - адрес сервера БД
-  - DB_PORT - порт БД
-- переменные S3-хранилища (MinIo)
-  - S3_ENDPOINT_URL - основной адрес хранилища 
-  - S3_OUTER_ENDPOINT_URL - внешний адрес хранилища 
-  - S3_ACCESS_KEY - логин от хранилища
-  - S3_SECRET_KEY - пароль от хранилища
-  - S3_BUCKET_NAME - имя корзины с которой будет работать API 
-  - S3_SECURE - параметр безопасности
-- переменные (по-умолчанию) модуля get_utm_tag/test_part2.py
-  - MAIN_SCANNING_SLEEP=3
-  - PROCESSES_WATCHER_SLEEP=60
-  - LIMIT_NUMBER_THREADS=20
-  - TIME_BUFFER_FOR_STUCK_PROCESSES_MINUTES=5
-
-# Создание виртуального окружения
-windows power shell:
-- Создание: ```python -m venv <имя_окружения>```
-- Запуск: ```<имя_окружения>/Scripts/activate```
-
-# Установка необходимых библиотек
-Необходиые библиотеки представлены в файле requirements.txt. 
-Для установки требуется выполнить команду: 
-
-(winwows power shell): ```pip install -r requirements.txt```
-
-# Локальный запуск
-
-Для локальной работы достаточно запустить модуль main.py: 
-```python manage.py runserver```
-
-# Docker (Временно не поддерживается)
-Запуск в docker-контейнере
-
-Сборка образа: ```docker build -t <имя_образа>```
-
-Базовый запуск контейнера: ```docker run <имя_образа>```
