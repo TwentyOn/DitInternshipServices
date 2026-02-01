@@ -22,7 +22,6 @@ logger = logging.getLogger(__file__)
 RESULTS_DIR = os.path.join(settings.BASE_DIR, 'media', 'image_processing_results')
 
 
-
 class ImageProcessor:
     def __init__(self, image_file: bytes, filename: str, request_data):
         """
