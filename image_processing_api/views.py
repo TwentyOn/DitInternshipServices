@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 class NewRequest(APIView):
     """
-    Принимает изображение или архив с изображениями
+    Принимает в обработку изображение или архив с изображениями
     """
     serializer_class = Request
 
@@ -33,7 +33,7 @@ class NewRequest(APIView):
                 "file_url": serializers.CharField()
             },
         ),
-    400: {'description': 'message'}})
+        400: {'message': 'info_message'}})
     def post(self, request):
         try:
             data = Request(data=request.data)
