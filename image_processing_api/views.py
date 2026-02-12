@@ -29,11 +29,17 @@ class NewRequest(APIView):
         200: inline_serializer(
             name='SuccessResponse',
             fields={
-                "file_name": serializers.CharField(),
-                "file_url": serializers.CharField()
-            },
+                "file_name": serializers.CharField(help_text='имя файла'),
+                "file_url": serializers.CharField(help_text='путь для скачивания файла')
+            }
         ),
-        400: {'message': 'info_message'}})
+        400: inline_serializer(
+            name='ErrorResponse',
+            fields={
+                "message": serializers.CharField(help_text='описание ошибки')
+            }
+        )
+    })
     def post(self, request):
         try:
             data = Request(data=request.data)
