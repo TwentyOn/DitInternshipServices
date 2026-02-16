@@ -93,7 +93,7 @@ class Purpose(models.Model):
     group_name = models.TextField(db_comment='Имя группы целей')
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'campaign_stats"."purpose'
         db_table_comment = 'Таблица целей'
 
