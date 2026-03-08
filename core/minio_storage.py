@@ -30,24 +30,25 @@ class MyStorage:
 
         if not self.client.bucket_exists(bucket_name):
             self.client.make_bucket(bucket_name)
+            print('Создан тестовый bucket')
 
-        config = LifecycleConfig(
-            [
-                Rule(
-                    rule_id="cleanup_dir_zipfiles",
-                    status="Enabled",
-                    expiration=Expiration(days=1),
-                    rule_filter=Filter(prefix="zipfiles/"),
-                ),
-                Rule(
-                    rule_id="cleanup_dir_images",
-                    status="Enabled",
-                    expiration=Expiration(days=1),
-                    rule_filter=Filter(prefix="images/"),
-                ),
-            ]
-        )
-        self.client.set_bucket_lifecycle(BUCKET_NAME, config)
+            config = LifecycleConfig(
+                [
+                    Rule(
+                        rule_id="cleanup_dir_zipfiles",
+                        status="Enabled",
+                        expiration=Expiration(days=1),
+                        rule_filter=Filter(prefix="zipfiles/"),
+                    ),
+                    Rule(
+                        rule_id="cleanup_dir_images",
+                        status="Enabled",
+                        expiration=Expiration(days=1),
+                        rule_filter=Filter(prefix="images/"),
+                    ),
+                ]
+            )
+            self.client.set_bucket_lifecycle(BUCKET_NAME, config)
         print("Подключение к хранилищу успешно")
 
     def create_bucket(self, bucket_name=BUCKET_NAME):
