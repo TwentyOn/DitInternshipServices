@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 import logging
 
+import rest_framework.permissions
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -120,7 +121,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated'
+    # ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # 'PAGE_SIZE': 2
 }
 
 # Internationalization
