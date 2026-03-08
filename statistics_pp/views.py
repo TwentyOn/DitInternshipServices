@@ -5,6 +5,7 @@ from django.db.utils import IntegrityError
 from django.db.models import ObjectDoesNotExist
 from rest_framework.response import Response
 from rest_framework.exceptions import status, APIException
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
@@ -72,6 +73,7 @@ class GetMetricsRegions(APIView):
 
 class GetOkpd2Segments(APIView):
     pagination_class = PageNumberPagination
+    throttle_classes = [UserRateThrottle]
 
     def get(self, request):
         """

@@ -129,7 +129,12 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated'
     # ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    # 'PAGE_SIZE': 2
+    # 'PAGE_SIZE': 2,
+    'DEFAULT_THROTTLE_RATES': {
+            'anon': '1/second',
+            'user': '1/second',
+            'premium': '1/second'
+        }
 }
 
 # Internationalization
