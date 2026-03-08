@@ -6,6 +6,8 @@ from django.db.models import ObjectDoesNotExist
 from rest_framework.response import Response
 from rest_framework.exceptions import status, APIException
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
 from .serializers import ProviderParameters, NewSegment
 from .models import Metric, RegionCodifier, OKPD2Codifier, Segment, OKPD2, Process, Region
@@ -69,6 +71,8 @@ class GetMetricsRegions(APIView):
 
 
 class GetOkpd2Segments(APIView):
+    pagination_class = PageNumberPagination
+
     def get(self, request):
         """
         Выдаёт ОКПД2-коды и пользовательские сегменты из БД
@@ -76,9 +80,14 @@ class GetOkpd2Segments(APIView):
         raw_okpd_queryset = OKPD2Codifier.objects.all()
         raw_segments_queryset = Segment.objects.all()
 
+        paginator = self.pagination_class()
+        paginator.page_size=2
+
+        paginate_segments_queryset=paginator.paginate_queryset(raw_segments_queryset, request)
+
         result = {
             'segments': [{'id': segment.id, 'segment_name': segment.name} for segment
-                         in raw_segments_queryset],
+                         in paginate_segments_queryset],
             'okpd2': [{'id': okpd.id, 'code': okpd.code, 'description': okpd.description} for okpd in
                       raw_okpd_queryset.filter(parent_id=0)],
         }
@@ -205,3 +214,6 @@ class GetSegmentData(APIView):
             array.append(okpd2_obj.id)
             array.reverse()
         return array
+
+class GetSegments(ListAPIView):
+    pass
